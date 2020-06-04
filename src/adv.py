@@ -1,10 +1,11 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mouth beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -33,11 +34,41 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+
+
 #
 # Main
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player1 = Player('Steve', room['outside'])
+
+while True:
+    print(player1.current_room.name)
+    print(player1.current_room.description)
+    direction = input('Which direction do you move?(n,s,e,w):')
+    if direction == 'n':
+        try:
+            player1.current_room = player1.current_room.n_to
+        except:
+            print('You can not move in this direction!')
+    if direction == 's':
+        try:
+            player1.current_room = player1.current_room.s_to
+        except:
+            print('You can not move in this direction!')
+    if direction == 'e':
+        try:
+            player1.current_room = player1.current_room.e_to
+        except:
+            print('You can not move in this direction!') 
+    if direction == 'w':
+        try:
+            player1.current_room = player1.current_room.w_to
+        except:
+            print('You can not move in this direction!') 
+    if direction == 'q':
+        break 
 
 # Write a loop that:
 #
